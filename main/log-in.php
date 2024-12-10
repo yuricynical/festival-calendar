@@ -38,3 +38,7 @@
     </div>
 </body>
 </html>
+
+<?php
+    include "../utils/db/crud.php"
+?>
