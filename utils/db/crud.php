@@ -3,7 +3,7 @@
 
     class Crud {
 
-        Private $conn;
+        Public $conn;
         Private $currentPage;
 
         public function __construct() {
@@ -11,14 +11,14 @@
             $this -> conn = $connIns->getConn(); 
             $this -> currentPage = htmlspecialchars($_SERVER["PHP_SELF"]);
         }
-
+        
         public function getCurrentPage() {
             return $this->currentPage;
         }
 
         // CHECK REQ
 
-        Private function checkMethod() {
+        Public function checkMethod() {
             if ($_SERVER["REQUEST_METHOD"] == "POST"){
                 return true;
             }
@@ -29,21 +29,29 @@
 
         Public function insertRecord($tableName, $valuesToInsert) {
 
-            if (!checkMethod()) { return false; }
+            if (!$this-> checkMethod()) return false; 
 
             $columnsStr = implode(", ", array_map(fn($col) => "`$col`", array_keys($valuesToInsert)));
-            $parametersStr = implode(", ", array_map(fn($key) => ":$key", array_keys($valuesToInsert)));
-
-            $insertSql = "INSERT INTO `$tableName` ($columnsStr) VALUES ($parametersStr)";
+            $placeholders = implode(", ", array_fill(0, count($valuesToInsert), "?"));
+        
+            $insertSql = "INSERT INTO `$tableName` ($columnsStr) VALUES ($placeholders)";
+            
             try {
-                $stmt = $conn->prepare($insertSql);
-                foreach ($valuesToInsert as $key => $value) {
-                    $stmt->bindValue(":$key", $value);
+      
+                $stmt = $this->conn->prepare($insertSql);
+
+                if ($stmt === false) {
+                    throw new Exception("Failed to prepare statement: " . $this->conn->error);
                 }
 
-                $stmt->execute();
-                return true; 
+         
+                $types = str_repeat("s", count($valuesToInsert)); 
+                $values = array_values($valuesToInsert); 
+                $stmt->bind_param($types, ...$values);
 
+                $stmt->execute();
+                return true;
+        
             } catch (Exception $ex) {
                 echo "Error inserting record: " . $ex->getMessage();
                 return false;
@@ -55,62 +63,88 @@
 
         // GET ALL VALUES
 
-        Public function getAllData($tableName) {
+        public function getAllData($tableName) {
+            if (!$this-> checkMethod()) return false; 
+
             $resultTable = [];
             $query = "SELECT * FROM `$tableName`";
-
+        
             try {
-                // Prepare the SQL query
-                $stmt = $conn->prepare($query);
+                $stmt = $this->conn->prepare($query);
+                
+                if (!$stmt) {
+                    throw new Exception("Failed to prepare statement: " . $this->conn->error);
+                }
+        
                 $stmt->execute();
-
-                // Fetch all rows as an associative array
-                $resultTable = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+                $result = $stmt->get_result();
+        
+                if ($result) {
+                    $resultTable = $result->fetch_all(MYSQLI_ASSOC);
+                } else {
+                    throw new Exception("Error getting result: " . $stmt->error);
+                }
+        
+                $stmt->close();
+        
             } catch (Exception $ex) {
-                // Handle exceptions
                 echo "Error retrieving rows: " . $ex->getMessage();
             }
-
+        
             return $resultTable; // Return the fetched data
         }
 
-
         // UPDATE
 
-        Public function updateRecord($tableName, $targetCol, $targetValue, $updatedValues) {
-            // Build the SET part of the query
+        public function updateRecord($tableName, $targetCol, $targetValue, $updatedValues) {
+            if (!$this-> checkMethod()) return false; 
+
             $setPart = "";
-            $firstColumn = true;
-
+            $types = "";
+            $params = []; 
+        
             foreach ($updatedValues as $column => $value) {
-                if (!$firstColumn) {
-                    $setPart .= ", ";
-                }
-                $setPart .= "`$column` = :$column";
-                $firstColumn = false;
+                $setPart .= "`$column` = ?, ";
+                $types .= $this->getParamType($value);
+                $params[] = $value;
             }
-
-            // Construct the full SQL query
-            $query = "UPDATE `$tableName` SET $setPart WHERE  $targetCol` = :targetValue
-            ";
-
+        
+            $setPart = rtrim($setPart, ", ");
+            $types .= $this->getParamType($targetValue);
+            $params[] = $targetValue;
+        
+            $query = "UPDATE `$tableName` SET $setPart WHERE `$targetCol` = ?";
+        
             try {
-                $stmt = $conn->prepare($query);
-
-                foreach ($updatedValues as $column => $value) {
-                    $stmt->bindValue(":$column", $value);
+                $stmt = $this->conn->prepare($query);
+        
+                if (!$stmt) {
+                    throw new Exception("Failed to prepare statement: " . $this->conn->error);
                 }
-
-                $stmt->bindValue(":targetValue", $targetValue, PDO::PARAM_INT);
-
+        
+                $stmt->bind_param($types, ...$params);
                 $stmt->execute();
-
-                return true; // Update successful
+        
+                return $stmt->affected_rows > 0; // Return true if rows were updated
             } catch (Exception $ex) {
-                // Handle exception
+                // Handle exceptions
                 echo "Error updating record: " . $ex->getMessage();
                 return false;
+            }
+        }
+
+         // Helper function to determine parameter type for MySQLi bind_param
+ 
+        private function getParamType($value) {
+            switch (gettype($value)) {
+                case 'integer':
+                    return 'i'; // Integer
+                case 'double':
+                    return 'd'; // Double
+                case 'string':
+                    return 's'; // String
+                default:
+                    return 'b'; // Blob or unknown
             }
         }
     }
