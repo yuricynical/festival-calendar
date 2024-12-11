@@ -1,14 +1,19 @@
 <?php
-    include "conn.php";
+    require_once "conn.php";
 
     class Crud {
-        
-        Private $connClass;
+
         Private $conn;
+        Private $currentPage;
 
         public function __construct() {
-            $this->connClass = new Conn();
-            $this->conn = $this->connClass->getConn();
+            $connIns = new Conn(); 
+            $this -> conn = $connIns->getConn(); 
+            $this -> currentPage = htmlspecialchars($_SERVER["PHP_SELF"]);
+        }
+
+        public function getCurrentPage() {
+            return $this->currentPage;
         }
 
         // CHECK REQ
@@ -50,7 +55,7 @@
 
         // GET ALL VALUES
 
-        Public function getAllData($tableName, $conn) {
+        Public function getAllData($tableName) {
             $resultTable = [];
             $query = "SELECT * FROM `$tableName`";
 
@@ -73,7 +78,7 @@
 
         // UPDATE
 
-        Public function updateRecord($tableName, $columnName, $idValue, $updatedValues) {
+        Public function updateRecord($tableName, $targetCol, $targetValue, $updatedValues) {
             // Build the SET part of the query
             $setPart = "";
             $firstColumn = true;
@@ -87,7 +92,8 @@
             }
 
             // Construct the full SQL query
-            $query = "UPDATE `$tableName` SET $setPart WHERE `$columnName` = :idValue";
+            $query = "UPDATE `$tableName` SET $setPart WHERE  $targetCol` = :targetValue
+            ";
 
             try {
                 $stmt = $conn->prepare($query);
@@ -96,7 +102,8 @@
                     $stmt->bindValue(":$column", $value);
                 }
 
-                $stmt->bindValue(":idValue", $idValue, PDO::PARAM_INT);
+                $stmt->bindValue(":targetValue", $targetValue, PDO::PARAM_INT);
+
                 $stmt->execute();
 
                 return true; // Update successful
