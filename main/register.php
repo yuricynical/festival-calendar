@@ -1,3 +1,8 @@
+<?php
+    require_once "../utils/db/crud.php";
+    $crud = new Crud();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -8,7 +13,7 @@
     <body>
         <div class="bg-wrapper">
             <div class="login-wrapper">
-                <form action="">
+                <form action="<?php $crud->getCurrentPage() ?>" method="post">
 
                     <h1>Register</h1>
 
@@ -40,7 +45,7 @@
 </html>
 
 <?php
-    include "../utils/db/crud.php"
     
+ 
 
 ?>

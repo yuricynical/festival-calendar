@@ -1,7 +1,17 @@
 <?php
-    class files
+    class Files
     {
-        function parseEnvFile($filePath)
+        Private $envVariables = Null;
+
+        function __construct() {
+            $this-> envVariables = $this->parseEnvFile(dirname(dirname(__DIR__)) . "\.env");
+        }
+        
+        public function getEnvVar(){
+            return $this->envVariables;
+        }
+
+        public function parseEnvFile($filePath)
         {
             if (!file_exists($filePath)) {
                 throw new Exception("File not found: $filePath");
@@ -33,5 +43,6 @@
         
             return $variables;
         }
+
     }
 ?>

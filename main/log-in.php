@@ -45,25 +45,40 @@
         </div>  
     </body>
     <script type="text/javascript">
+
         // remember me function
         
         const rmCheck = document.getElementById("rem-checkbox");
         const pwd = document.getElementById("password-box");
         const email = document.getElementById("email-box");
 
-        if (localStorage.checkbox && localSTorage.checkbox !== ""){
+        // read
+
+        if (localStorage.checkbox && localStorage.checkbox !== ""){
             rmCheck.setAttribute("checked","checked");
-            passInput.value = localStorage.password;
-            emailInput.value = localStorage.email;
+            pwd.Value = localStorage.password;
+            email.Value = localStorage.email;
         } else {
-            
+            rmCheck.removeAttribute("checked");
+            pwd.Value = "";
+            email.Value = "";
         }
 
+        // add data to local storage
+
+        function rememberMe() {
+            if (rmCheck.checked && email.value !== "" && pwd.value !== "") {
+                localStorage.email = email.value;
+                localStorage.password = pwd.value;
+                localStorage.checkbox = rmCheck.Value;
+            }else {
+                localStorage.email = "";
+                localStorage.password = "";
+                localStorage.checkbox = "";
+            }
+        }
     </script>   
 </html>
-
-
-
 
 <?php
  
