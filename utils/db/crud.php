@@ -11,7 +11,7 @@
             $this -> conn = $connIns->getConn(); 
             $this -> currentPage = htmlspecialchars($_SERVER["PHP_SELF"]);
         }
-        
+
         public function getCurrentPage() {
             return $this->currentPage;
         }
@@ -25,11 +25,13 @@
             return false;
         }
 
+        Public function sanitize($str, $filter=FILTER_SANITIZE_SPECIAL_CHARS, $input=INPUT_POST) {
+            return filter_input($input,$str, $filter);
+        }
+
         // CREATE
 
         Public function insertRecord($tableName, $valuesToInsert) {
-
-            if (!$this-> checkMethod()) return false; 
 
             $columnsStr = implode(", ", array_map(fn($col) => "`$col`", array_keys($valuesToInsert)));
             $placeholders = implode(", ", array_fill(0, count($valuesToInsert), "?"));
@@ -64,7 +66,6 @@
         // GET ALL VALUES
 
         public function getAllData($tableName) {
-            if (!$this-> checkMethod()) return false; 
 
             $resultTable = [];
             $query = "SELECT * FROM `$tableName`";
@@ -97,7 +98,6 @@
         // UPDATE
 
         public function updateRecord($tableName, $targetCol, $targetValue, $updatedValues) {
-            if (!$this-> checkMethod()) return false; 
 
             $setPart = "";
             $types = "";

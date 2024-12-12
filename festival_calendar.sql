@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2024 at 01:44 PM
+-- Generation Time: Dec 11, 2024 at 06:48 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -46,7 +46,7 @@ CREATE TABLE `likes` (
   `post_id` int(11) DEFAULT NULL COMMENT 'like in posts',
   `comment_id` int(11) DEFAULT NULL COMMENT 'like in comments',
   `user_id` int(11) NOT NULL,
-  `date_added` int(11) NOT NULL
+  `date_added` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -60,7 +60,7 @@ CREATE TABLE `posts` (
   `user_id` int(11) DEFAULT NULL,
   `description` varchar(255) NOT NULL,
   `image` longblob NOT NULL,
-  `date_added` int(11) NOT NULL DEFAULT current_timestamp()
+  `date_added` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
