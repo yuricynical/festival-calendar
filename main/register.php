@@ -30,7 +30,7 @@
                     </div>
                     
                     <div class="input-box">
-                        <input type="text" placeholder="Email" name="email" required>
+                        <input type="email" placeholder="Email" name="email" required>
                         <i class="fa-solid fa-envelope"></i>
                     </div>
 
@@ -39,10 +39,10 @@
                         <i class="fa-solid fa-lock"></i>
                     </div>
 
-                    <button type="submit" class="btn">Login</button>
+                    <input type="submit" class="btn" value="Register">
 
                     <div class="register-link"> 
-                        <p>Already have an account?<input type="submit">Log-in</></p>
+                        <p>Already have an account?<a href="./login.php">Log in</a></p>
                     </div>
                     
                 </form>
@@ -54,15 +54,24 @@
 <?php
     if ($crud->checkMethod()) {
         $emailVal = $crud->sanitize("email");
+        $auth = $encrypt->generateAuthCode();
 
         $data = [
             $usr_C->getUsername() => $crud->sanitize("username"),
             $usr_C->getEmail() => $emailVal,
-            $usr_C->getPassword()=> $encrypt->encryptPassword($crud->sanitize("password"))
+            $usr_C->getPassword()=> $encrypt->encryptPassword($crud->sanitize("password")),
+            $usr_C->getAuthCode()=>$auth
         ];
         
-        If ($crud->insertRecord($usr_C->getTableName(), $data)){
-            $mailer->sendMail($emailVal, "Festival Calendar Verification Code", $encrypt->generateAuthCode());
+        $subject_text = "Your verification code for festival calendar: <b>" . $auth . "</b>";
+
+        // check if the email is existing
+        
+
+        if ($crud->insertRecord($usr_C->getTableName(), $data)){
+            if($mailer->sendMail($emailVal, "no-reply", $subject_text)) {
+               // do something succssfully registered
+            }
         };
     }
 ?>

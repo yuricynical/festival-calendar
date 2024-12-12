@@ -1,24 +1,44 @@
 <?php
     use PHPMailer\PHPMailer\PHPMailer;
-    require_once dirname(dirname(__DIR__)) . '/vendor/autoload.php';
-
+    use PHPMailer\PHPMailer\Exception;
+   
+    require_once dirname(dirname(__DIR__)) . '\vendor\autoload.php';
+    
     class Mailer{   
         public function sendMail($address, $subject, $content) {
-            $mail = new PHPMailer(true);
             $files = new Files();
             $envFile = $files->getEnvVar();
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Password= $envFile['GMAIL_PASS_MAILER'];
-            $mail->SMTPSecure = 'ssl';
-            $mail->Port=465;
-            
-            $mail->setFrom($envFile['GMAIL_HOST']);
-            $mail->addAddress($address);
+            $host = $envFile['GMAIL_HOST'];
+            $mail = new PHPMailer(true);
 
-            $mail->Subject = $subject;
-            $mail->Body = $content;
+            try{
+                $mail->isSMTP();
+                $mail->SMTPAuth = true;
+                
+                $mail->Host = 'smtp.gmail.com';
+                $mail->Username = $host;
+                $mail->Password= $envFile['GMAIL_PASS_MAILER'];
+    
+                $mail->SMTPSecure = 'ssl';
+                $mail->Port=465;
+                
+                $mail->setFrom($host);
+                $mail->addAddress($address);
+
+                $mail->isHTML(true); 
+
+                $mail->Subject = $subject;
+                $mail->Body = $content;
+
+                if ($mail->send()) {
+                    return true;
+                }else{
+                    return false;
+                }
+
+            }catch(Exception $ex){
+                return false; 
+            }  
         }
     }
 ?>

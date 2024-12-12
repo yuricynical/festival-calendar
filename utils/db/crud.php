@@ -66,13 +66,12 @@
         // GET ALL VALUES
 
         public function getAllData($tableName) {
-
             $resultTable = [];
             $query = "SELECT * FROM `$tableName`";
         
             try {
                 $stmt = $this->conn->prepare($query);
-                
+        
                 if (!$stmt) {
                     throw new Exception("Failed to prepare statement: " . $this->conn->error);
                 }
@@ -81,7 +80,9 @@
                 $result = $stmt->get_result();
         
                 if ($result) {
-                    $resultTable = $result->fetch_all(MYSQLI_ASSOC);
+                    while ($row = $result->fetch_assoc()) {
+                        $resultTable[] = $row; // Each row is already an associative array (columnName => value)
+                    }
                 } else {
                     throw new Exception("Error getting result: " . $stmt->error);
                 }
@@ -92,7 +93,7 @@
                 echo "Error retrieving rows: " . $ex->getMessage();
             }
         
-            return $resultTable; // Return the fetched data
+            return $resultTable; 
         }
 
         // UPDATE
