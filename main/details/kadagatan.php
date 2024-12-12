@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/details.css">
+    <link rel="stylesheet" href="../../styles/details.css">
     <title>Pinyasan Festival</title>
 </head>
 <body>
     <a href="home.html" class="btn">Back</a>
     <div class="content">
         <h1>Kadagatan Festival</h1>
-        <img src="../assets/images/Kadagatan.jpg" alt="Kadagatan Festival" style="max-width: 100%; height: auto;">
+        <img src="../../assets/assets/images/Kadagatan.jpg" alt="Kadagatan Festival" style="max-width: 100%; height: auto;">
         <p>
             The Kadagatan Festival, celebrated annually in Mercedes, Camarines Norte, is a vibrant tribute to the town's rich marine resources and its residents' gratitude for the blessings of the sea.
             Held every August, the festival's name, derived from the Filipino word "dagat" (meaning sea), reflects its deep connection to the maritime lifestyle of the local community. It is both a thanksgiving and a prayer for continued abundance, highlighting the importance of marine conservation and sustainable practices​.

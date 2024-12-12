@@ -3,16 +3,31 @@
 
     class Encryption{
         Private $key = Null;
-        Private $byteCode = Null;
+        Private $salt = Null;
 
         public function __construct() {
             $fileUtils = new files();
             $getEnv = $fileUtils->getEnvVar();
             
-            $this->byteCode = $getEnv['PASS_BYTE_CODE'];
+            $this->salt = $getEnv['PASS_BYTE_CODE'];
             $this->key = $getEnv['PASS_KEY_CODE'];
         }
 
+        function generateToken($length = 32)
+        {
+            if ($length <= 0) {
+                throw new InvalidArgumentException('Token length must be a positive integer.');
+            }
+        
+            $token = bin2hex(random_bytes($length / 2));
+    
+            if (!empty($salt)) {
+                $token .= hash('sha256', $this->salt);
+            }
+        
+            return $token;
+        }
+        
         function generateAuthCode($length = 6) {
             $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
             
@@ -26,7 +41,7 @@
 
         function encryptPassword($clearText) {
             $clearBytes = mb_convert_encoding($clearText, 'UTF-16LE'); 
-            $salt = hex2bin($this->byteCode);
+            $salt = hex2bin($this->salt);
             
             $iterations = 1000; 
             $keyLength = 32; 
@@ -47,7 +62,7 @@
         function decryptPassword($cipherText) {
           
             $cipherBytes = base64_decode($cipherText);
-            $salt = hex2bin($this->byteCode);
+            $salt = hex2bin($this->salt);
             
             $iterations = 1000;
             $keyLength = 32; 

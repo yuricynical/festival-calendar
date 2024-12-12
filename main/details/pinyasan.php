@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/details.css">
+    <link rel="stylesheet" href="../../styles/details.css">
     <title>Pinyasan Festival</title>
 </head>
 <body>
     <a href="home.html" class="btn">Back</a>
     <div class="content">
         <h1>Pinyasan Festival</h1>
-        <img src="../assets/images/Pinyasan.jpg" alt="Pinyasan Festival" style="max-width: 100%; height: auto;">
+        <img src="../../assets/assets/images/Pinyasan.jpg" alt="Pinyasan Festival" style="max-width: 100%; height: auto;">
         <p>
             The Pinyasan Festival in Daet, Camarines Norte, is a vibrant annual celebration held every June 15-24 to showcase the town’s pride in its unique and sweet Formosa pineapples, often called the “Queen Pineapple of the Philippines.” The festival coincides with the feast day of Saint John the Baptist, the town’s patron saint, blending cultural, religious, and agricultural elements.
             It features lively events such as street dancing, a float parade, a beauty pageant, pineapple-themed contests, and a unique tradition of giving away free pineapples and pineapple-based treats like ice cream​.
