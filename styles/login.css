@@ -123,3 +123,7 @@
 .register-link p a:hover {
   text-decoration: underline;
 }
+
+.existing {
+  text-align: center;
+}

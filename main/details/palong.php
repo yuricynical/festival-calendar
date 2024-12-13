@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/details.css">
+    <link rel="stylesheet" href="../../styles/details.css">
     <title>Palong Festival</title>
 </head>
 <body>
     <a href="home.html" class="btn">Back</a>
     <div class="content">
         <h1>Palong Festival</h1>
-        <img src="../assets/images/Palong.jpg" alt="Palong Festival" style="max-width: 100%; height: auto;">
+        <img src=".../../assets/assets/images/Palong.jpg" alt="Palong Festival" style="max-width: 100%; height: auto;">
         <p>
             The Palong Festival is a vibrant annual celebration held in Capalonga, Camarines Norte, from May 10 to 13. The festival honors the town's agricultural heritage, symbolized by the rooster's comb (locally called "palong manok"), which represents abundance and resilience.
             The event features colorful street dancing, agro-industrial fairs, and cultural presentations. It also coincides with the feast of the Black Nazarene on May 13, attracting devotees and tourists alike.

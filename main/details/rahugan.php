@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/details.css">
+    <link rel="stylesheet" href="../../styles/details.css">
     <title>Rahugan Festival</title>
 </head>
 <body>
     <a href="home.html" class="btn">Back</a>
     <div class="content">
         <h1>Rahugan Festival</h1>
-        <img src="../assets/images/Rahugan.jpg" alt="Rahugan Festival" style="max-width: 100%; height: auto;">
+        <img src="../../assets/assets/images/Rahugan.jpg" alt="Rahugan Festival" style="max-width: 100%; height: auto;">
         <p>
             The Rahugan Festival is an annual cultural and religious celebration in Basud, Camarines Norte, typically held from October 18 to 24. It coincides with the feast of St. Raphael the Archangel, the town's patron saint.
             The festival’s name comes from the term rahug, which refers to a cluster of coconuts, symbolizing strength through unity—an essential value among the Basudeños. The event honors the town's agricultural heritage, particularly its rich coconut production, while promoting community solidarity and cultural pride.

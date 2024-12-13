@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/details.css">
+    <link rel="stylesheet" href="../../styles/details.css">
     <title>Mananap Festival</title>
 </head>
 <body>
     <a href="home.html" class="btn">Back</a>
     <div class="content">
         <h1>Mananap Festival</h1>
-        <img src="../assets/images/Mananap.jpg" alt="Mananap Festival" style="max-width: 100%; height: auto;">
+        <img src="../../assets/assets/images/Mananap.jpg" alt="Mananap Festival" style="max-width: 100%; height: auto;">
         <p>
             The Mananap Festival is a vibrant annual event celebrated in San Vicente, Camarines Norte, showcasing the region's rich cultural heritage and natural wonders. The festival is named after "Mananap," which translates to "animals" in the local dialect, emphasizing the town's biodiversity and its role in sustaining the livelihoods of its people.
             This event typically includes activities such as street dancing competitions, cycling events, and various cultural presentations that highlight local traditions and the community's strong connection to nature​.

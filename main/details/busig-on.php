@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/details.css">
+    <link rel="stylesheet" href="../../styles/details.css">
     <title>Busig-on Festival</title>
 </head>
 <body>
     <a href="home.html" class="btn">Back</a>
     <div class="content">
         <h1>Busig-on Festival</h1>
-        <img src="../assets/images/Busig-on.jpg" alt="Busig-on Festival" style="max-width: 100%; height: auto;">
+        <img src="../../assets/images/Busig-on.jpg" alt="Busig-on Festival" style="max-width: 100%; height: auto;">
         <p>
             The Busig-On Festival is an annual celebration held every September 7-8 in Labo, Camarines Norte. It is rooted in the epic tale of Busig-On, a legendary hero from Bicol who embodies the values of courage, heroism, and resilience.
             This festival aims to preserve and promote the rich cultural heritage of the region while highlighting the unique identity of Labo.
