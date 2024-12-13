@@ -112,3 +112,53 @@ body {
     font-size: 15p ;
     color: #333;
 }
+.timer{
+  font-family: 'Poppins';
+  width: 550px;
+  height: 370px;
+  margin: auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.timer .flipdown{
+  margin: auto;
+  text-align: center;
+}
+.timer h1{
+  text-align: center;
+  font-size: 100px;
+  text-transform: uppercase;
+  color: fff;
+  margin-bottom: 30px;
+}
+.timer .flipddown h2{
+  text-align: center;
+  font-size: 100px;
+  text-transform: uppercase;
+  color: fff;
+  margin-bottom: 30px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.flipdown.flipdown__theme-dark .rotor-group-heading:before {
+  color: #fff;
+}
+
+.rotor-group-heading {
+  margin-bottom: 10px;
+}
+
+.flipdown.flipdown__theme-dark .rotor-bottom, .flipdown.flipdown__theme-dark .rotor-leaf-rear {
+  color: #000;
+  background-color: #fff;
+}
+
+.flipdown.flipdown__theme-dark .rotor, .flipdown.flipdown__theme-dark .rotor-top, .flipdown.flipdown__theme-dark .rotor-leaf-front {
+  color: #000;
+  background-color: #fff;
+}
+
+.flipdown.flipdown__theme-dark .rotor-group:nth-child(n+2):nth-child(-n+3):before, .flipdown.flipdown__theme-dark .rotor-group:nth-child(n+2):nth-child(-n+3):after {
+  background-color: #fff;
+}
