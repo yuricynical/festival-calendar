@@ -43,7 +43,7 @@
                         const helper = new Helper();
                         helper.removeAttributeByName('$elementName', '$attribute');
                     </script>
-                ";
+                 ";
         }   
     }
 ?>
