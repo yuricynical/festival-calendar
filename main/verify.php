@@ -26,24 +26,24 @@
                 <form action="<?php $crud->getCurrentPage() ?>" method="post">
 
                     <h1>Verify</h1>
+                    
+                    <div class="expire" align="center">
+                        <p>This form will expire in 5 mins</p>
+                    </div>
 
-                    <div class="input-box">
+                    <div class="input-box"> 
                         <input type="text" placeholder="Verification Code" name="input-code" required>
-                        <i class="fa-solid fa-user"></i>
+                        <i class="fa-solid fa-lock"></i>
                     </div>
 
                     <div class="existing" name="wrong-code" hidden>
                         <p>Wrong code please try again</p>
                     </div>
 
-                    <input type="submit" class="btn" value="Register">
+                    <input type="submit" class="btn" value="Proceed">
 
                     <div class="register-link"> 
                         <p>Already have an account?<a href="./login.php">Log in</a></p>
-                    </div>
-                        
-                    <div name="unable-send" align="center" hidden>
-                        <p>Unable to send email</p>
                     </div>
                 </form>
             </div>
@@ -54,6 +54,6 @@
 <?php
     if ($crud->checkMethod()) {
 
-        
+            
     }
 ?>

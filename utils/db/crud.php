@@ -25,6 +25,8 @@
             return false;
         }
 
+        // SANITIZE INPUT
+
         Public function sanitize($str, $filter=FILTER_SANITIZE_SPECIAL_CHARS, $input=INPUT_POST) {
             return filter_input($input,$str, $filter);
         }
@@ -94,6 +96,8 @@
             return $resultTable; 
         }
         
+        // GET ROW BY VALUE
+
         public function getRowByValue($tableName, $columnName, $value) {
             $resultTable = [];
             $query = "SELECT * FROM `$tableName` WHERE `$columnName` = ?";
@@ -131,6 +135,7 @@
             return $resultTable;
         }
 
+        // GET ROW BY TWO VALUES 
 
         public function getRowByTwoValues($tableName, $columnName01, $value01, $columnName02, $value02)
         {
@@ -174,7 +179,6 @@
             return $resultTable;
         }
 
-
         // UPDATE
 
         public function updateRecord($tableName, $targetCol, $targetValue, $updatedValues) {
@@ -212,6 +216,8 @@
                 return false;
             }
         }
+
+        // CHECK DATA TYPES
 
         private function getParamTypes($params) {
             if (!is_array($params)) {

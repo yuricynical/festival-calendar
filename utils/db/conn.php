@@ -1,5 +1,5 @@
 <?php
-    include 'files.php';
+    require_once 'files.php';
 
     Class Conn {
         Private $conn = Null;

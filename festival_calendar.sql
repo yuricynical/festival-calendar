@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2024 at 06:48 PM
+-- Generation Time: Dec 13, 2024 at 11:48 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -83,6 +83,13 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `email`, `username`, `password`, `date_added`, `last_accessed`, `is_auth`, `auth_code`, `session_token`, `user_level`) VALUES
+(29, 'godwingalvez26@gmail.com', '123', '0QAUN3tlWOna5qaSHXEDbA==', '2024-12-13 04:54:39', NULL, 0, 'hQKZOH', '0fb869e86eb6d7b35d8b9954076d992a', 'User');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -142,7 +149,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Constraints for dumped tables
