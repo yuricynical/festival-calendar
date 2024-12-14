@@ -36,7 +36,7 @@
                         <i class="fa-solid fa-lock"></i>
                     </div>
 
-                    <div class="existing" name="wrong-code" hidden>
+                    <div name="wrong-code" hidden align="center">
                         <p>Wrong code please try again</p>
                     </div>
 
@@ -53,7 +53,25 @@
 
 <?php
     if ($crud->checkMethod()) {
-
-            
+        $verif_val = $crud->sanitize('input-code');
+        $get_user_data = $crud->getRowByValue($usr_C->getTableName(),  $usr_C->getAuthCode(), $verif_val);
+        try {   
+            if (count($get_user_data) > 0 && $_COOKIE[$usr_C->getSessionToken()] === $get_user_data[0][$usr_C->getSessionToken()]) {
+                // sucess
+                $update_data = [
+                    $usr_C->getIsAuth() => 1
+                ];
+             
+                if ($crud->updateRecord($usr_C->getTableName(), $usr_C->getAuthCode(), $verif_val, $update_data)){             
+                    header("Location: ./success.php");
+                }
+            } else{
+                // failed
+                $scripts->removeAttrName("wrong-code", "hidden");
+            }   
+        } catch (Exception $ex) {
+            $scripts->removeAttrName("wrong-code", "hidden");
+        }   
+       
     }
 ?>

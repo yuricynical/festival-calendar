@@ -1,6 +1,7 @@
 <?php
     require_once "../utils/db/crud.php";
     require_once "../constants/users.php";
+    session_start();
 
     class routes {
         public function check_session() {
@@ -9,28 +10,40 @@
             $usr_C = new UserConstants();
 
             // handle missing token
+            try 
+            {
+                if (!isset($_COOKIE[$usr_C->getSessionToken()]) || empty($_COOKIE[$usr_C->getSessionToken()])) {
+                    $this->deny_direct_access();
+                    exit;
+                }
+                
+                $get_user_token = $crud->getRowByValue(
+                    $usr_C->getTableName(),
+                    $usr_C->getSessionToken(),
+                    $_COOKIE[$usr_C->getSessionToken()]
+                );
+                
+                // handle token validation
+                
+                if (count($get_user_token) === 0 || 
+                $_SESSION[$usr_C->getSessionToken()] !== $_COOKIE[$usr_C->getSessionToken()] || 
+                $_SESSION[$usr_C->getSessionToken()] !== $get_user_token[0][$usr_C->getSessionToken()]) {
 
-            if (!isset($_COOKIE['user_token']) || empty($_COOKIE['user_token'])) {
-                $this->deny_direct_access();
-                exit;
-            }
-            
-            $get_user_token = $crud->getRowByValue(
-                $usr_C->getTableName(),
-                $usr_C->getSessionToken(),
-                $_COOKIE['user_token']
-            );
-            
-            // handle token validation
-
-            if (count($get_user_token) === 0) {
                 $this->deny_direct_access();
                 exit;
             }     
+            }catch (Exception $ex) {
+                $this->deny_direct_access();
+                exit;
+            }
         }
 
         public function init_token($newToken) {
-            setcookie('user_token', $newToken, time() + 300, '/', '', false, true);
+            $usr_C = new UserConstants();
+            
+            // two fold security (cookie & session)
+            setcookie($usr_C->getSessionToken(), $newToken, time() + 300, '/', '', false, true); 
+            $_SESSION[$usr_C->getSessionToken()] = $newToken;
         }
 
         public function deny_direct_access() {

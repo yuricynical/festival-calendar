@@ -43,6 +43,10 @@
                         <i class="fa-solid fa-envelope"></i>
                     </div>
 
+                    <div class="existing" name="existing-email" hidden>
+                        <p>This email is already registered</p>
+                    </div>
+
                     <div class="input-box">
                         <input type="password" placeholder="Password" name="password" required>
                         <i class="fa-solid fa-lock"></i>
@@ -72,7 +76,7 @@
         $token = $encrypt->generateToken();
         $passwordVal = $encrypt->encryptPassword($crud->sanitize("password"));
     
-        $get_emails = $crud->getRowByValue($usr_C->getTableName(), $usr_C->getEmail(), $emailVal);
+        $get_email = $crud->getRowByValue($usr_C->getTableName(), $usr_C->getEmail(), $emailVal);
         $get_usernames = $crud->getRowByValue($usr_C->getTableName(), $usr_C->getUsername(), $usernameVal);
         
         $subject_text = "Your verification code for festival calendar: <b>" . $auth . "</b>";
@@ -88,9 +92,17 @@
             $usr_C->getSessionToken() => $token
         ];
 
-        // HANDLE EXISITING EMAIL -> GO TO VERIFY PAGE INSTEAD
+        // HANDLE EXISTING EMAIL 
 
-        if (count($get_emails) > 0) {
+        if (count($get_email) > 0 && $get_email[0][$usr_C->getIsAuth()]) {
+            $insertMode = false;
+            $valid = false;
+            $scripts->removeAttrName("existing-email", "hidden");
+        }
+
+        // HANDLE EXISTING EMAIL BUT NOT VERIFIED
+
+        if (count($get_email) > 0) {
             $crud->updateRecord($usr_C->getTableName(), $usr_C->getEmail(), $emailVal, $data);
             $insertMode = False;
         }
