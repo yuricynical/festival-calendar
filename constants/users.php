@@ -10,16 +10,31 @@ class UserConstants {
     const LAST_ACCESSED = 'last_accessed';
     const IS_AUTH = 'is_auth';
     const AUTH_CODE = 'auth_code';
-    const SESSION_TOKEN = 'session_token';
+
+    // tokens
+    const SESSION_TOKEN = "session_token";
+    const REGISTER_TOKEN = "register_token";
+    const FORGOT_TOKEN = "forgot_token";
+
     const USER_LEVEL = 'user_level';
-    const LOGIN_TOKEN = "user_login_token";
+
 
     public static function getTableName() {
         return self::TABLE_NAME;
     }
 
-    public static function getLoginToken() {
-        return self::LOGIN_TOKEN; // for session only
+    // tokens
+
+    public static function getSessionToken() {
+        return self::SESSION_TOKEN;
+    }
+
+    public static function getRegisterToken() {
+        return self::REGISTER_TOKEN; 
+    }
+
+    public static function getForgotToken() {
+        return self::FORGOT_TOKEN;
     }
 
     // Getter method for USER_ID
@@ -62,10 +77,7 @@ class UserConstants {
         return self::AUTH_CODE;
     }
 
-    // Getter method for SESSION_TOKEN
-    public static function getSessionToken() {
-        return self::SESSION_TOKEN;
-    }
+   
 
     // Getter method for USER_LEVEL
     public static function getUserLevel() {

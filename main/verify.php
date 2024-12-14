@@ -10,7 +10,7 @@
     $routes = new Routes();
 
     // deny direct access
-    $routes->check_session();
+    $valid_session = $routes->check_session($usr_C->getRegisterToken());
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +56,7 @@
         $verif_val = $crud->sanitize('input-code');
         $get_user_data = $crud->getRowByValue($usr_C->getTableName(),  $usr_C->getAuthCode(), $verif_val);
         try {   
-            if (count($get_user_data) > 0 && $_COOKIE[$usr_C->getSessionToken()] === $get_user_data[0][$usr_C->getSessionToken()]) {
+            if (count($get_user_data) > 0 && $valid_session) {
                 // sucess
                 $update_data = [
                     $usr_C->getIsAuth() => 1

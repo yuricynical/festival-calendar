@@ -1,6 +1,8 @@
 <?php
     require_once "../utils/db/crud.php";
+    require_once "../constants/users.php";
     $crud = new Crud();
+    $usr_C = new UserConstants();
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +14,7 @@
     </head>
     <body>
         <?php include "../components/navbar.php"?>
-        
+
         <div class="bg-wrapper">
             <div class="login-wrapper">
 
@@ -21,12 +23,12 @@
                     <h1>Login</h1>
 
                     <div class="input-box">
-                        <input type="email" placeholder="Email" id="email-box" required>
+                        <input type="email" placeholder="Email" id="email-box" name="email-input" required>
                         <i class="fa-solid fa-envelope"></i>
                     </div>
 
                     <div class="input-box">
-                        <input type="password" placeholder="Password" id="password-box" required>
+                        <input type="password" placeholder="Password" id="password-box" name="password-input" required>
                         <i class="fa-solid fa-lock"></i>
                     </div>
 
@@ -34,7 +36,7 @@
                         <label>
                             <input type="checkbox" id="rem-checkbox">Remember me
                         </label>
-                            <a href="#">Forgot Password?</a>
+                            <a href="./forgot.php">Forgot Password?</a>
                     </div>
 
                     <button type="submit" class="btn">Login</button>
@@ -84,9 +86,15 @@
 </html>
 
 <?php
-    $data =[
-       
-    ]
-    
-   
+
+    if ($crud->checkMethod()) {
+        $password_val = $crud->sanitize("email-input");
+        $email_val = $crud->sanitize("password-input");
+
+        $get_user = $crud->getRowByValue($usr_C->getTableName(), $usr_C->getEmail(), $email_val);
+
+
+
+    };
+
 ?>

@@ -23,12 +23,14 @@
         <title>Register</title>
     </head>
     <body>
+        <?php include "../components/navbar.php"?>
+        
         <div class="bg-wrapper">
             <div class="login-wrapper">
                 <form action="<?php $crud->getCurrentPage() ?>" method="post">
 
                     <h1>Register</h1>
-                    
+
                     <div class="input-box">
                         <input type="text" placeholder="Username" name="username" required>
                         <i class="fa-solid fa-user"></i>
@@ -89,7 +91,7 @@
             $usr_C->getUsername() => $usernameVal,
             $usr_C->getPassword() => $passwordVal,
             $usr_C->getAuthCode() => $auth,
-            $usr_C->getSessionToken() => $token
+         
         ];
 
         // HANDLE EXISTING EMAIL 
@@ -127,7 +129,7 @@
 
         if ($valid) {
             if ($mailer->sendMail($emailVal, "no-reply", $subject_text)) {
-                $routes->init_token($token);
+                $routes->init_session($get_email[0][$usr_C->getUserId()],$usr_C->getRegisterToken(), $token); // init register session
                 header("Location: ./verify.php");
             }else {
                 $scripts->removeAttrName('unable-send', 'hidden');
