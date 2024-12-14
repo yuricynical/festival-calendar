@@ -71,7 +71,6 @@
             }   
         } catch (Exception $ex) {
             $scripts->removeAttrName("wrong-code", "hidden");
-        }   
-       
+        } 
     }
 ?>

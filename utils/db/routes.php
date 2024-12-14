@@ -38,11 +38,9 @@
             }
         }
 
-        public function init_token($newToken) {
+        public function init_token($newToken, $timeout=300) {
             $usr_C = new UserConstants();
-            
-            // two fold security (cookie & session)
-            setcookie($usr_C->getSessionToken(), $newToken, time() + 300, '/', '', false, true); 
+            setcookie($usr_C->getSessionToken(), $newToken, time() + $timeout, '/', '', false, true); 
             $_SESSION[$usr_C->getSessionToken()] = $newToken;
         }
 

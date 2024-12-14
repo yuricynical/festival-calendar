@@ -28,7 +28,7 @@
                 <form action="<?php $crud->getCurrentPage() ?>" method="post">
 
                     <h1>Register</h1>
-
+                    
                     <div class="input-box">
                         <input type="text" placeholder="Username" name="username" required>
                         <i class="fa-solid fa-user"></i>

@@ -12,9 +12,14 @@ class UserConstants {
     const AUTH_CODE = 'auth_code';
     const SESSION_TOKEN = 'session_token';
     const USER_LEVEL = 'user_level';
+    const LOGIN_TOKEN = "user_login_token";
 
     public static function getTableName() {
         return self::TABLE_NAME;
+    }
+
+    public static function getLoginToken() {
+        return self::LOGIN_TOKEN; // for session only
     }
 
     // Getter method for USER_ID

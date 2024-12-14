@@ -1,3 +1,6 @@
+@import "./main.css";
+@import "./navbar.css";
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -8,7 +11,7 @@ body {
 /* button to open modal */
 #openModalBtn {
   padding: 10px 20px;
-  margin: 20px;
+  margin-top: 3rem;
   background-color: #1877f2;
   color: white;
   border: none;
@@ -101,5 +104,3 @@ button#submitPost {
   margin-top: 10px;
   border-radius: 5px;
 }
-
-

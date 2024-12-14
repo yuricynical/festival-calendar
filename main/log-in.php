@@ -11,6 +11,8 @@
         <title>Log-in</title>
     </head>
     <body>
+        <?php include "../components/navbar.php"?>
+        
         <div class="bg-wrapper">
             <div class="login-wrapper">
 
@@ -30,7 +32,8 @@
 
                     <div class="remember-forgot">
                         <label>
-                            <input type="checkbox" id="rem-checkbox">Remember me</label>
+                            <input type="checkbox" id="rem-checkbox">Remember me
+                        </label>
                             <a href="#">Forgot Password?</a>
                     </div>
 

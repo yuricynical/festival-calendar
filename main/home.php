@@ -1,3 +1,8 @@
+<?php 
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,16 +12,9 @@
     <title>Festival | Home</title>
 </head>
 <body>
-    <nav class="navbar">
-        <img height="50" src="../assets/images/CNlogo.png" class="logo" alt="">
-        <ul class="links-container">
-            <li class="link-item"><a href="/" class="link">home</a></li>
-            <li class="link-item"><a href="/" class="link">Festival</a></li>
-            <li class="link-item"><a href="/" class="link">Post</a></li>
-        </ul>
-    </nav>
-
-    <header class="header">
+    <?php include "../components/navbar.php"?>
+        
+    <header class="header"> 
         <div class="content">
             <h1 class="heading">
                 <span class="small">Welcome to</span>
@@ -27,7 +25,7 @@
         </div>
     </header>
 
-    <section class="blogs-section">
+    <section class="blogs-section" id="blogs">
         <div class="blog-card">
             <img src="../assets/images/Pabirik.jpg" class="blog-image" alt="">
             <h1 class="blog-title">Pabirik Festival</h1>
