@@ -1,0 +1,105 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f2f5;
+}
+
+/* button to open modal */
+#openModalBtn {
+  padding: 10px 20px;
+  margin: 20px;
+  background-color: #1877f2;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* modal styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* close button */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* post input styles */
+textarea {
+  width: 100%;
+  height: 100px;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  resize: none;
+}
+
+input[type="file"] {
+  margin: 10px 0;
+}
+
+img#imagePreview {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+button#submitPost {
+  width: 100%;
+  padding: 10px;
+  background-color: crimson;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#postsContainer {
+  margin: 20px;
+}
+
+.post {
+  background: white;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+
