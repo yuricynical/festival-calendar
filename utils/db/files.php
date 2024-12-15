@@ -4,7 +4,7 @@
         Private $envVariables = Null;
 
         function __construct() {
-            $this-> envVariables = $this->parseEnvFile(dirname(dirname(__DIR__)) . "\.env");
+            $this-> envVariables = $this->parseEnvFile(dirname(dirname(__DIR__)) . "/.env");
         }
         
         public function getEnvVar(){
@@ -16,7 +16,7 @@
             if (!file_exists($filePath)) {
                 throw new Exception("File not found: $filePath");
             }
-        
+            
             $variables = [];
             $lines = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         

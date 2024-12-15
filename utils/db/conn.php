@@ -14,7 +14,7 @@
             $password = $envVariables['PHP_DB_PWD'];  // If it's an empty string, it will return an empty string
             $dbname = $envVariables['PHP_DB_NAME'];
         
-            $this->conn = new mysqli($this->serverName, $username, $password, $dbname);
+            $this->conn = new mysqli("$this->serverName", "$username", "$password", "$dbname");
        
             // Check connection
             if ($this->conn->connect_error) {

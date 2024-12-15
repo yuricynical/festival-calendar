@@ -2,7 +2,7 @@
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
    
-    require_once dirname(dirname(__DIR__)) . '\vendor\autoload.php';
+    require_once dirname(dirname(__DIR__)) . '/vendor/autoload.php';
     
     class Mailer{   
         public function sendMail($address, $subject, $content) {

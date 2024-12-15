@@ -1,6 +1,5 @@
 <?php 
     ob_start();
-  
 
     require_once "../constants/users.php";
     require_once "../utils/db/crud.php";
