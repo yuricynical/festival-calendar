@@ -13,8 +13,8 @@
 
     $getForgotToken = $_GET[$usr_C->getForgotToken()];
     $getuser = $crud->getRowByValue($usr_C->getTableName(), $usr_C->getForgotToken(), $getForgotToken);
- 
     $valid_session = $routes->check_session($usr_C->getForgotToken());
+ 
     if (!$valid_session) {
         $routes->deny_direct_access();
     } 
@@ -31,7 +31,7 @@
         <div class="bg-wrapper">
             <div class="login-wrapper">
 
-                <form action="<?php $crud->getCurrentPage() ?>" method="post">
+                <form action="<?php echo $crud->getCurrentPage() . "?forgot_token=" . $getForgotToken?>" method="post">
 
                     <h1>Reset Password</h1>
 
@@ -53,27 +53,30 @@
 
 <?php
     if ($crud->checkMethod()) {
-   
-        $password_val = $crud->sanitize("password-input");
-     
+        $password_val = $encrypt->encryptPassword($crud->sanitize("password-input"));
+        
         $updated_value = [
-            $usr_C->getPassword() => $encrypt->encryptPassword($password_val)
+            $usr_C->getPassword() => $password_val
         ];
-   
+
         try {
-         
             if ($valid_session) { 
-                $crud->updateRecord($usr_C->getTableName(), $usr_C->getForgotToken(), $getForgotToken,  $updated_value);
-                $scripts->removeAttrName("success-changed", "hidden");   
-                session_destroy();
-                header( "refresh:3;url=./log-in.php" );
-                exit;
+                $userID = $getuser[0][$usr_C->getUserId()];
+                if ($crud->updateRecord($usr_C->getTableName(), $usr_C->getUserId(), $userID, $updated_value)) {
+                    $scripts->removeAttrName("success-changed", "hidden");   
+                    session_destroy();
+                    header( "refresh:3;url=./log-in.php" );
+                    exit;
+                } else{
+                    echo "Does not work";
+                };
+              
             }else {
                 session_destroy();
                 $routes->deny_direct_access();
             };
         }catch(Exception $ex) {
-            session_destroy();
+            #session_destroy();
             $routes->deny_direct_access();
         }
     };

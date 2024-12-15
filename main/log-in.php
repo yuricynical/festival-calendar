@@ -27,7 +27,7 @@
         <div class="bg-wrapper">
             <div class="login-wrapper">
 
-               <form action="<?php $crud->getCurrentPage() ?>" method="post" onsubmit="rememberMe()">
+               <form action="<?php echo $crud->getCurrentPage() ?>" method="post" onsubmit="rememberMe()">
 
                     <h1>Login</h1>
 

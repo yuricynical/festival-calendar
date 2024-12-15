@@ -31,7 +31,7 @@
 
         <div class="bg-wrapper">
             <div class="login-wrapper">
-                <form action="<?php $crud->getCurrentPage() ?>" method="post">
+                <form action="<?php echo $crud->getCurrentPage() ?>" method="post">
 
                     <h1>Forgot Password</h1>
                     

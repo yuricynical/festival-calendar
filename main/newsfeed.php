@@ -1,3 +1,13 @@
+<?php 
+  require_once "../constants/users.php";
+  require_once "../constants/posts.php";
+  require_once "../utils/db/crud.php";
+
+  $crud = new Crud();
+  $post_C = new PostConstants();
+  $user_C = new UserConstants();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,22 +25,25 @@
     <button id="openModalBtn">Create Post</button>
 
   <!-- modal -->
-    <div id="postModal" class="modal">
+  <div id="postModal" class="modal">
       <div class="modal-content">
-        <!-- close button -->
-        <span class="close-btn" id="closeModalBtn">&times;</span>
-        <h2>Create a Post</h2>
-        
-        <!-- post -->
-        <textarea id="postText" placeholder="What's on your mind?"></textarea>
+        <form action="<?php echo $crud->getCurrentPage()?>" method="post">
 
-        <input type="file" id="imageInput" accept="image/*">
-        <img id="imagePreview" src="" alt="Image Preview" style="display: none;">
-        
-        <!-- submit -->
-        <button id="submitPost">Post</button>
+            <!-- close button -->
+            <span class="close-btn" id="closeModalBtn">&times;</span>
+            <h2>Create a Post</h2>
+            
+            <!-- post -->
+            <textarea id="postText" placeholder="What's on your mind?"></textarea>
+
+            <input type="file" id="imageInput" accept="image/*">
+            <img id="imagePreview" src="" alt="Image Preview" style="display: none;">
+            
+            <!-- submit -->
+            <button id="submitPost">Post</button>
+        </form>
       </div>
-    </div>
+  </div>
 
   <!-- try posted content pabago o paalis if di need -->
     <div id="postsContainer"></div>
@@ -47,7 +60,7 @@
           </p>
           <div class="post-gallery">
             <img src="../assets/images/pinyasan1.jpg" alt="Pinyasan 1">
-            <img src="../assets/images/pinyasan2.jpg" alt="Pinyasan 2">
+            
           </div>
           <div class="comment-section">
             <textarea placeholder="Write your thoughts..."></textarea>
