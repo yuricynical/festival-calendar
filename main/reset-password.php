@@ -13,8 +13,9 @@
 
 
     $getuser = $crud->getRowByValue($usr_C->getTableName(), $usr_C->getForgotToken(), $_GET[$usr_C->getForgotToken()]);
+    $valid_session = $routes->check_session($usr_C->getForgotToken());
 
-    if ($routes->check_session($usr_C->getForgotToken())) {
+    if ($valid_session) {
         if($_GET[$usr_C->getForgotToken()] != $_COOKIE[$usr_C->getForgotToken()]) {
             $routes->deny_direct_access();
         }
@@ -22,6 +23,8 @@
         if(count($getuser) < 0) {
             $routes->deny_direct_access();
         }
+    } else {
+        $routes->deny_direct_access();
     }
 ?>
 
@@ -65,7 +68,7 @@
         ];
 
         try {
-            if ($crud->updateRecord($usr_C->getTableName(), $usr_C->getUserId(), $getuser[0][$usr_C->getUserId()], $updated_value)) { 
+            if ($crud->updateRecord($usr_C->getTableName(), $usr_C->getUserId(), $getuser[0][$usr_C->getUserId()], $updated_value) && $valid_session) { 
                 $scripts->removeAttrName("success-changed", "hidden");   
                 session_destroy();
                 header( "refresh:3;url=./log-in.php" );

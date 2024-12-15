@@ -5,7 +5,9 @@
     $usr_C = new UserConstants();
 
     // deny direct access
-    $routes->check_session($usr_C->getRegisterToken());
+    if(!$routes->check_session($usr_C->getRegisterToken())) {
+        $routes->deny_direct_access();
+    };
 ?>
 
 <!DOCTYPE html>

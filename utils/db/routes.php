@@ -13,13 +13,11 @@
             try 
             {
                 if (!isset($_COOKIE[$token_type]) || empty($_COOKIE[$token_type])) {
-                    $this->deny_direct_access();
                     return false;
                     exit;
                 }
                 
                 if (!isset($_SESSION[$token_type]) || empty($_SESSION[$token_type])) {
-                    $this->deny_direct_access();
                     return false;
                     exit;
                 }
@@ -36,7 +34,6 @@
                 $_SESSION[$token_type] !== $_COOKIE[$token_type] || 
                 $_SESSION[$token_type] !== $get_user_token[0][$token_type]) {
 
-                $this->deny_direct_access();
                 return false;
                 exit;
             }     

@@ -5,6 +5,7 @@
     require_once "../utils/db/routes.php";
     require_once "../utils/db/encryption.php";
     require_once "../utils/db/mailer.php";
+    require_once "../utils/db/files.php";
   
     $usr_C = new UserConstants();
     $conn = new Conn();
@@ -13,6 +14,7 @@
     $routes = new Routes();
     $encrypt = new Encryption();
     $mailer= new Mailer();
+    $files = new Files();
   
 ?>
 
@@ -58,12 +60,15 @@
 
 <?php
     if ($crud->checkMethod()) {
+
        $email_val = $crud->sanitize("input-email");
        $token_val = $encrypt->generateToken();
        $get_user = $crud->getRowByValue($usr_C->getTableName(), $usr_C->getEmail(), $email_val);
-       $servername = $conn->getServerName();
-       $resetUrl = $servername . "/main/reset-password.php?" . $usr_C->getForgotToken() . "=" .  $token_val;
 
+       $env = $files->getEnvVar();
+       $servername = $env['SERVER_NAME'];
+       $resetUrl = $servername . "/main/reset-password.php?" . $usr_C->getForgotToken() . "=" .  $token_val;
+        
        $subject_val = "Proceed here to change your password: <a href='" . $resetUrl . "'>Click here</a>";
 
        if (count($get_user) > 0) {

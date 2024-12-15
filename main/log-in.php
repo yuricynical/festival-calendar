@@ -1,8 +1,11 @@
 <?php
     require_once "../utils/db/crud.php";
     require_once "../constants/users.php";
+    require_once "../utils/db/encryption.php";
+
     $crud = new Crud();
     $usr_C = new UserConstants();
+    $encrypt = new Encryption();
 ?>
 
 <!DOCTYPE html>
@@ -93,6 +96,10 @@
 
         $get_user = $crud->getRowByValue($usr_C->getTableName(), $usr_C->getEmail(), $email_val);
 
+        // login (sa wakas)
+        if (count($get_user) > 0 && $encrypt->decryptPassword($get_user[0][$usr_C->getPassword()]) === $password_val) {
+
+        }
 
 
     };

@@ -10,7 +10,9 @@
     $routes = new Routes();
 
     // deny direct access
-    $valid_session = $routes->check_session($usr_C->getRegisterToken());
+    if (!$valid_session = $routes->check_session($usr_C->getRegisterToken())){
+        $routes->deny_direct_access();
+    };
 ?>
 
 <!DOCTYPE html>

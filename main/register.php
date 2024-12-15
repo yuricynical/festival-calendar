@@ -90,11 +90,10 @@
             $usr_C->getEmail() => $emailVal,
             $usr_C->getUsername() => $usernameVal,
             $usr_C->getPassword() => $passwordVal,
-            $usr_C->getAuthCode() => $auth,
-         
+            $usr_C->getAuthCode() => $auth
         ];
 
-        // HANDLE EXISTING EMAIL 
+        // HANDLE EXISTING EMAIL
 
         if (count($get_email) > 0 && $get_email[0][$usr_C->getIsAuth()]) {
             $insertMode = false;
