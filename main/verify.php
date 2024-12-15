@@ -8,7 +8,7 @@
     $crud = new Crud();
     $scripts = new Scripts();
     $routes = new Routes();
-
+    
     // deny direct access
     if (!$valid_session = $routes->check_session($usr_C->getRegisterToken())){
         $routes->deny_direct_access();

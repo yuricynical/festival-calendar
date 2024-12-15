@@ -4,10 +4,9 @@
     require_once "../utils/db/crud.php";
     require_once "../constants/users.php";
 
-    session_start();
-  
     class routes {
         public function check_session($token_type) {
+            session_status() === PHP_SESSION_NONE ? session_start() : null;
 
             $crud = new Crud();
             $usr_C = new UserConstants();
@@ -47,11 +46,12 @@
             }
 
             // return true if success
+            
             return true;
         }
 
         public function init_session($user_id, $token_type, $newToken, $timeout=300) {
-       
+            session_status() === PHP_SESSION_NONE ? session_start() : null;
 
             $crud = new Crud();
             $usr_C = new UserConstants();

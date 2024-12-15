@@ -56,7 +56,7 @@
                     <input type="submit" class="btn" value="Register">
 
                     <div class="register-link"> 
-                        <p>Already have an account?<a href="./login.php">Log in</a></p>
+                        <p>Already have an account?<a href="./log-in.php">Log in</a></p>
                     </div>
                     
                     <div name="unable-send" align="center" hidden>
