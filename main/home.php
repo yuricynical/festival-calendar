@@ -1,8 +1,3 @@
-<?php 
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +7,7 @@
     <title>Festival | Home</title>
 </head>
 <body>
-    <?php include "../components/navbar.php"?>
+    <?php require "../components/navbar.php"?>
         
     <header class="header"> 
         <div class="content">

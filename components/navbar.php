@@ -1,43 +1,39 @@
 <?php 
-    require_once "../utils/db/routes.php";
+    ob_start();
+    session_start();
+
     require_once "../constants/users.php";
     require_once "../utils/db/crud.php";
 
-    $routes = new routes();
     $usr_C = new UserConstants();
     $crud = new Crud();
-
     $getUser = Null;
-    $valid_session = $routes->check_session($usr_C->getSessionToken());
- 
-    if($valid_session) {
-        $getUser = $crud->getRowByValue($usr_C->getTableName(), $usr_C->getSessionToken(), $_SESSION[$usr_C->getSessionToken()]);
-        if (count($getUser) < 0) {
-            $valid_session = false;
+    $valid_session = False;
+    $username = "Guest";
+
+    if (isset($_SESSION[$usr_C->getSessionToken()])) {
+        try {
+            $getUser = $crud->getRowByValue($usr_C->getTableName(), $usr_C->getSessionToken(), $_SESSION[$usr_C->getSessionToken()]);
+            $valid_session = count($getUser) > 0;
+            $username = $getUser[0][$usr_C->getUsername()];
+        } catch (Exception $ex) { 
+            $valid_session = False;
         }
-    };
+    }
 ?>
 
 <nav class="navbar">
-
     <img height="50" src="../assets/images/CNlogo.png" class="logo" alt="">
-
     <ul class="links-container">
         <li class="link-item"><a href="./home.php" class="link">home</a></li>
         <li class="link-item"><a href="#blogs" class="link">Festival</a></li>
         <li class="link-item"><a href="./newsfeed.php" class="link">Post</a></li>
     </ul>
 
-    <form action="<?php $crud->getCurrentPage() ?>" method="post" class="navbar-logged">
-        <?php if ($valid_session): ?>
-            <p><?php echo $getUser[0][$usr_C->getUsername()] ?></p>
-        <?php else: ?>
-            <i class="fa-solid fa-user"></i>
-            <p>Guest</p>
-        <?php endif; ?>
-
+    <form method="post" class="navbar-logged">
+        <p><?php echo $username ?></p>
         <a href="../main/log-in.php">
-            <button type="submit" class="btn-login" name="btn-log"> 
+            <button class="btn-login" name="btn-log"> 
                 <?php if (!$valid_session): ?>
                     Log in
                 <?php else: ?>
@@ -46,23 +42,23 @@
             </button>
         </a>   
     </form>
-
 </nav>
 
 <?php
-    if ($crud->checkMethod()) {
+    if (isset($_POST['btn-log'])) {
         if (!$valid_session) {
-            // login
-            header("Location: ./log-in.php");
-            
+            header("Location: ./log-in.php");    
         }else {
             // logout
             session_unset();
             session_destroy();
+            header("Refresh: 0");
+            exit();
         }
     }
-?>
 
+    ob_end_flush();
+?>
 
 <style>
     .navbar {

@@ -1,4 +1,6 @@
 <?php
+    ob_start();
+
     require_once "../utils/db/crud.php";
     require_once "../constants/users.php";
     require_once "../utils/forms/scripts.php";
@@ -15,7 +17,6 @@
     $encrypt = new Encryption();
     $mailer= new Mailer();
     $files = new Files();
-  
 ?>
 
 <!DOCTYPE html>
@@ -73,13 +74,16 @@
 
        if (count($get_user) > 0) {
             if ($mailer->sendMail($email_val, "no-subject", $subject_val)) {
-                $routes->init_session($get_user[0][$usr_C->getUserId()], $usr_C->getForgotToken(), $token_val);
                 $scripts->removeAttrName("success-send", "hidden");
             }else{
                 $scripts->removeAttrName("failed-send", "hidden");
             }
+            
+            $routes->init_session($get_user[0][$usr_C->getUserId()], $usr_C->getForgotToken(), $token_val);
        }else {
             $scripts->removeAttrName("wrong-email", "hidden");
        }
     }
+
+    ob_end_flush();
 ?>

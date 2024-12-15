@@ -1,8 +1,11 @@
 <?php
+    ob_start();
+
     require_once "../utils/db/crud.php";
     require_once "../constants/users.php";
-    session_start();
 
+    session_start();
+  
     class routes {
         public function check_session($token_type) {
 
@@ -48,13 +51,15 @@
         }
 
         public function init_session($user_id, $token_type, $newToken, $timeout=300) {
+       
+
             $crud = new Crud();
             $usr_C = new UserConstants();
-
+            
             $update_data = [
                 $token_type => $newToken
             ];
-
+           
             $crud->updateRecord($usr_C->getTableName(), $usr_C->getUserId(), $user_id, $update_data);
             setcookie($token_type, $newToken, time() + $timeout, '/', '', false, true); 
             $_SESSION[$token_type] = $newToken;
@@ -62,9 +67,9 @@
 
         public function deny_direct_access() {
             header("HTTP/1.0 403 Forbidden");
-            echo "Direct access is not allowed.";
             exit;
         }
-
     }
+
+    ob_end_flush();
 ?>

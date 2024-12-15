@@ -66,6 +66,7 @@
              
                 if ($crud->updateRecord($usr_C->getTableName(), $usr_C->getAuthCode(), $verif_val, $update_data)){             
                     header("Location: ./success.php");
+                    exit;
                 }
             } else{
                 // failed

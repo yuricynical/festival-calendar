@@ -1,4 +1,5 @@
 <?php
+    ob_start();
     require_once "../utils/db/crud.php";
     require_once "../constants/users.php";
     require_once "../utils/db/encryption.php";
@@ -12,9 +13,7 @@
     $crud = new Crud();
     $scripts = new Scripts();
     $routes = new Routes();
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -27,7 +26,7 @@
         
         <div class="bg-wrapper">
             <div class="login-wrapper">
-                <form action="<?php $crud->getCurrentPage() ?>" method="post">
+                <form action="<?php echo $crud->getCurrentPage()?>" method="post">
 
                     <h1>Register</h1>
 
@@ -68,10 +67,8 @@
         </div>  
     </body>
 </html>
-
 <?php
     if ($crud->checkMethod()) {
-
         $emailVal = $crud->sanitize("email");
         $usernameVal = $crud->sanitize("username");
         $auth = $encrypt->generateAuthCode();
@@ -127,15 +124,15 @@
         // HANDLE VERIFICATION CODE / SESSION TOKEN
 
         if ($valid) {
-            if ($mailer->sendMail($emailVal, "no-reply", $subject_text)) {
-                $routes->init_session($get_email[0][$usr_C->getUserId()],$usr_C->getRegisterToken(), $token); // init register session
-                header("Location: ./verify.php");
-            }else {
+            if (!$mailer->sendMail($emailVal, "no-reply", $subject_text)) {
                 $scripts->removeAttrName('unable-send', 'hidden');
-                $insertMode = False;
-                $valid = False;
             };
+
+            $routes->init_session($get_email[0][$usr_C->getUserId()],$usr_C->getRegisterToken(), $token); // init register session
+            header("Location: ./verify.php");
+            exit;
         }
     }
 
+    ob_end_flush();
 ?>
