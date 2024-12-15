@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../../styles/details.css">
     <script src="../../scripts/flipdown.js"></script>
     <link rel="stylesheet" href="../../styles/flipdown.css">
+    <link rel="stylesheet" href="../../styles/comments.css">
     <title>Palong Festival</title>
 </head>
 <body>
@@ -40,6 +41,17 @@
         </div>
     </div>
 
+    <br>
+    <div class="comment-form-container">
+        <h2>Leave a Comment</h2>
+        <form action="" method="post">
+            <label for="comment">Comment:</label>
+            <textarea name="Comment" id="comment" required></textarea>
+            <input type="submit" name="Submit" value="Submit">
+        </form>
+    </div>
+    <br>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             let timer_ = 1747094400
@@ -52,3 +64,28 @@
     </script>
 </body>
 </html>
+
+
+<!---Tanggalin na lang if walang kwenta--->
+<?php
+
+    if(isset($_POST["Submit"])){
+    $Comment = $_POST["Comment"];
+
+    $Old = fopen("comments.txt", "r+t");
+    $Old_Comments = fread($Old, 1024);
+
+    $Write = fopen("comments.txt", "w+");
+
+    $string =
+        "<div class='comment'><span>".$Comment."</span><br>
+        <span>".date("Y/m/d")."|".date("h:i A")."\n".$Old_Comments;
+    
+    fwrite($Write, $string);
+    fclose($Write);
+    fclose($Old);
+    }
+    $Read = fopen("comments.txt", "r+t");
+    echo "<h1>Comments:</h1><hr>".fread($Read, 1024);
+    fclose($Read);
+?>

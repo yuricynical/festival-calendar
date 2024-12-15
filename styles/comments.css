@@ -1,0 +1,71 @@
+.comment-form-container {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.comment-form-container h2 {
+    margin: 0 0 15px;
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+
+.comment-form-container label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+.comment-form-container textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+    font-size: 14px;
+    font-family: inherit;
+    color: #333;
+    outline: none;
+}
+
+.comment-form-container textarea:focus {
+    border-color: red;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+}
+
+.comment-form-container input[type="submit"] {
+    background-color: red;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+.comment-form-container input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.comment-form-container input[type="submit"]:active {
+    transform: scale(0.98);
+}
+
+@media (max-width: 480px) {
+    .comment-form-container {
+        padding: 15px;
+    }
+
+    .comment-form-container h2 {
+        font-size: 20px;
+    }
+}
