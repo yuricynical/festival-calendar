@@ -52,7 +52,6 @@
 </html>
 
 <?php
-
     if ($crud->checkMethod()) {
    
         $password_val = $crud->sanitize("password-input");
@@ -78,5 +77,4 @@
             $routes->deny_direct_access();
         }
     };
-
 ?>
