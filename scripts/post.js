@@ -34,6 +34,7 @@ imageInput.addEventListener("change", (e) => {
   }
 });
 
+/*
 // submit post 
 submitPostBtn.addEventListener("click", () => {
   const text = postText.value.trim();
@@ -66,6 +67,7 @@ submitPostBtn.addEventListener("click", () => {
   modal.style.display = "none";
   resetModal();
 });
+*/
 
 // function to reset modal inputs
 function resetModal() {
@@ -82,5 +84,3 @@ window.addEventListener("click", (e) => {
     resetModal();
   }
 });
-
-

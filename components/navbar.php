@@ -1,24 +1,24 @@
 <?php 
     ob_start();
-    session_start();
+  
 
     require_once "../constants/users.php";
     require_once "../utils/db/crud.php";
+    require_once "../utils/db/routes.php";
 
     $usr_C = new UserConstants();
     $crud = new Crud();
-    $getUser = Null;
-    $valid_session = False;
+    
+    // default value
+    $getUser = Null;  
     $username = "Guest";
 
-    if (isset($_SESSION[$usr_C->getSessionToken()])) {
-        try {
-            $getUser = $crud->getRowByValue($usr_C->getTableName(), $usr_C->getSessionToken(), $_SESSION[$usr_C->getSessionToken()]);
-            $valid_session = count($getUser) > 0;
-            $username = $getUser[0][$usr_C->getUsername()];
-        } catch (Exception $ex) { 
-            $valid_session = False;
-        }
+    $routes = New routes();
+    $valid_session = $routes->check_session($usr_C->getSessionToken());
+
+    if ($valid_session) {
+        $getUser = $crud->getRowByValue($usr_C->getTableName(), $usr_C->getSessionToken(), $_SESSION[$usr_C->getSessionToken()]);
+        $username = $getUser[0][$usr_C->getUsername()];
     }
 ?>
 

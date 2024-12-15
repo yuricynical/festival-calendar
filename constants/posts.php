@@ -5,9 +5,13 @@
         const POST_ID = 'post_id';
         const USER_ID = 'user_id';
         const DESCRIPTION = 'description';
-        const IMAGE = 'image';
+        const IMAGE = 'image_path';
         const DATE_ADDED = 'date_added';
     
+        public static function getTableName() {
+            return self::TABLE_NAME;
+        }
+
         // Getter method for POST_ID
         public static function getPostId() {
             return self::POST_ID;

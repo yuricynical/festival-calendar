@@ -105,7 +105,7 @@
  
         if (count($get_user) > 0 && $result == 0 && $get_user[0][$usr_C->getIsAuth()]) {
             $year = 31536000;
-            $routes->init_session($get_user[0][$usr_C->getUserId()], $usr_C->getSessionToken(), $newToken);
+            $routes->init_session($get_user[0][$usr_C->getUserId()], $usr_C->getSessionToken(), $newToken, $year);
             header("Location: ./newsfeed.php");
             exit;
         } else{
